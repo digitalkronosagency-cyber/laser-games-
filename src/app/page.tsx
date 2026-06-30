@@ -46,7 +46,7 @@ function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: str
 const offers = [
   {
     title: 'Pack Anniversaire',
-    description: 'Organisez un anniversaire inoubliable avec nos formules all-inclusive.',
+    description: "Organisez un anniversaire inoubliable avec nos formules all-inclusive.",
     features: ['Salle dédiée', 'Animateur', 'Gâteau offert', 'Invitations personnalisées'],
     href: '/anniversaire',
     icon: '🎂',
@@ -56,28 +56,52 @@ const offers = [
   {
     title: 'Offre Entreprise',
     description: 'Team building, séminaires et événements corporate sur mesure.',
-    features: ['Devis personnalisé', 'Groupes jusqu’à 200 pers.', 'Animation spécialisée', 'Espace privatisable'],
+    features: ['Devis personnalisé', "Groupes jusqu’à 200 pers.", 'Animation spécialisée', 'Espace privatisable'],
     href: '/entreprises',
     icon: '🏢',
   },
   {
     title: 'Événement Spécial',
-    description: 'EVJF, EVG, anniversaire adulte… nous créons des moments mémorables.',
+    description: "EVJF, EVG, anniversaire adulte… nous créons des moments mémorables.",
     features: ['Organisation complète', 'Thèmes personnalisés', 'Photos souvenir', 'Privatisation possible'],
     href: '/evenements',
     icon: '🎉',
   },
 ]
 
+const whyUs = [
+  {
+    icon: '🎮',
+    title: 'Matériel professionnel',
+    desc: 'Pistolets laser dernière génération, haches professionnelles, système son BlindTest haut de gamme.',
+  },
+  {
+    icon: '👨‍🏫',
+    title: 'Animateurs passionnés',
+    desc: "Notre équipe vous accompagne du briefing jusqu’à la fin de votre session pour une expérience optimale.",
+  },
+  {
+    icon: '🏛️',
+    title: 'Espace unique à Tours',
+    desc: 'Situé en plein cœur de Tours, notre complexe de 800 m² est le plus grand de la région.',
+  },
+  {
+    icon: '🎉',
+    title: 'Toutes occasions',
+    desc: "Anniversaire, EVJF, EVG, team building, soirée entre amis… nous avons la formule idéale.",
+  },
+]
+
 export default function HomePage() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const totalPages = Math.ceil(testimonials.length / 3)
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTestimonial(prev => (prev + 1) % Math.ceil(testimonials.length / 3))
+      setCurrentTestimonial(prev => (prev + 1) % totalPages)
     }, 5000)
     return () => clearInterval(timer)
-  }, [])
+  }, [totalPages])
 
   const visibleTestimonials = testimonials.slice(currentTestimonial * 3, currentTestimonial * 3 + 3)
 
@@ -91,7 +115,7 @@ export default function HomePage() {
           <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
         <div className="relative container-custom text-center z-10 pt-20">
-          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-6 animate-fade-in">
+          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-6">
             🏆 N°1 des loisirs à Tours
           </p>
           <h1 className="font-display text-6xl sm:text-7xl lg:text-9xl text-white leading-none mb-6">
@@ -99,7 +123,7 @@ export default function HomePage() {
             <span className="text-primary">EN VRAIE VIE</span>
           </h1>
           <p className="text-white/70 text-lg lg:text-xl max-w-2xl mx-auto mb-10">
-            Laser Game, Lancer de Hache et BlindTest – trois activités uniques pour des souvenirs inoubliables à Tours.
+            Laser Game, Lancer de Hache et BlindTest &ndash; trois activités uniques pour des souvenirs inoubliables à Tours.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-red-700 active:scale-95 transition-all">
@@ -134,7 +158,7 @@ export default function HomePage() {
         <div className="container-custom">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { icon: '🎯', title: 'Pas d’expérience requise', desc: 'Accessible à tous dès 6 ans' },
+              { icon: '🎯', title: "Pas d’expérience requise", desc: 'Accessible à tous dès 6 ans' },
               { icon: '👥', title: 'Groupes bienvenus', desc: 'De 2 à 200 personnes' },
               { icon: '💳', title: 'Réservation facile', desc: 'En ligne ou par téléphone' },
               { icon: '❤️', title: 'Clients satisfaits', desc: '98% de satisfaction' },
@@ -182,13 +206,7 @@ export default function HomePage() {
               <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Pourquoi nous choisir</p>
               <h2 className="font-display text-5xl text-white mb-8">L&apos;EXPÉRIENCE QUI FAIT LA DIFFÉRENCE</h2>
               <div className="space-y-6">
-                {[
-                  { icon: '🎮', title: 'Matériel professionnel', desc: 'Pistolets laser derniers génération, haches professionn
-                  elles, système son BlindTest haut de gamme.' },
-                  { icon: '👨‍🏫', title: 'Animateurs passionnés', desc: 'Notre équipe vous accompagne du briefing jusqu’à la fin de votre session pour une expérience optimale.' },
-                  { icon: '🏛️', title: 'Espace unique à Tours', desc: 'Situé en plein cœur de Tours, notre complexe de 800 m² est le plus grand de la région.' },
-                  { icon: '🎉', title: 'Toutes occasions', desc: 'Anniversaire, EVJF, EVG, team building, soirée entre amis… nous avons la formule idéale.' },
-                ].map(({ icon, title, desc }) => (
+                {whyUs.map(({ icon, title, desc }) => (
                   <div key={title} className="flex gap-4">
                     <span className="text-3xl shrink-0">{icon}</span>
                     <div>
@@ -209,7 +227,7 @@ export default function HomePage() {
               </div>
               <div className="absolute -bottom-4 -left-4 bg-dark-card rounded-xl p-4 text-center border border-white/10">
                 <p className="font-display text-4xl text-white">800m²</p>
-                <p className="text-white/70 text-xs">D’espace de jeu</p>
+                <p className="text-white/70 text-xs">D&apos;espace de jeu</p>
               </div>
             </div>
           </div>
@@ -237,7 +255,7 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Avis clients</p>
             <h2 className="font-display text-5xl text-white">ILS ONT ADORÉ</h2>
-            <p className="text-white/50 mt-3">+200 avis vérifiés sur Google • Note 4.8/5</p>
+            <p className="text-white/50 mt-3">+200 avis vérifiés sur Google &bull; Note 4.8/5</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {visibleTestimonials.map((t) => (
@@ -245,7 +263,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="flex justify-center gap-2 mt-8">
-            {Array.from({ length: Math.ceil(testimonials.length / 3) }).map((_, i) => (
+            {Array.from({ length: totalPages }).map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrentTestimonial(i)}
@@ -261,11 +279,11 @@ export default function HomePage() {
         <div className="container-custom">
           <div className="text-center mb-12">
             <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Nous trouver</p>
-            <h2 className="font-display text-5xl text-white">HORAIRES & ACCES</h2>
+            <h2 className="font-display text-5xl text-white">HORAIRES &amp; ACCES</h2>
           </div>
           <div className="grid lg:grid-cols-2 gap-8">
             <OpeningHours />
-            <div className="rounded-2xl overflow-hidden h-80 lg:h-auto">
+            <div className="rounded-2xl overflow-hidden" style={{ minHeight: '320px' }}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2668.0!2d0.7312!3d47.3548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDIxJzE3LjMiTiAwwrA0Myc1Mi4zIkU!5e0!3m2!1sfr!2sfr!4v1234567890"
                 width="100%"
